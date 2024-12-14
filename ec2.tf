@@ -2,8 +2,8 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_security_group" "wordpress_SG1" {
-  name        = "wordpress-SG1"
+resource "aws_security_group" "shiva" {
+  name        = "shiva"
   description = "Allow HTTP, HTTPS, SSH, and MySQL traffic"
 
   ingress {
@@ -43,16 +43,16 @@ resource "aws_security_group" "wordpress_SG1" {
 }
 
 # Create an EC2 instance for WordPress
-resource "aws_instance" "wordpress1" {
+resource "aws_instance" "instance" {
   ami           = "ami-0166fe664262f664c"
   instance_type = "t2.micro"
   key_name      = "docker"              
   subnet_id     = "subnet-064fb56482402091d"            
-  security_groups = [aws_security_group.wordpress_SG1.id]
+  security_groups = [aws_security_group.shiva.id]
 
   user_data = file("data.sh")            
 
   tags = {
-    Name = "WordPressServer1"
+    Name = "instance"
   }
 }
