@@ -2,7 +2,7 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_security_group" "wordpress_sg" {
+resource "aws_security_group" "wordpress_SG1" {
   name        = "wordpress-SG1"
   description = "Allow HTTP, HTTPS, SSH, and MySQL traffic"
 
@@ -47,8 +47,8 @@ resource "aws_instance" "wordpress1" {
   ami           = "ami-0166fe664262f664c"
   instance_type = "t2.micro"
   key_name      = "docker"              
-  subnet_id     = "subnet-0ad2d5a05cd9b3c15"            
-  security_groups = [aws_security_group.wordpress_sg.id]
+  subnet_id     = "subnet-064fb56482402091d"            
+  security_groups = [aws_security_group.wordpress_SG1.id]
 
   user_data = file("data.sh")            
 
